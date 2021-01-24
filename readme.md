@@ -2,17 +2,14 @@
 This folder shows some fundamental concepts of web server programming in Go. 
 It aims to use small code snippets to demonstrate how to use Go's libraries. 
 
-# 01-Using Template package
-This will demonstrate how we can pass variables to templates.
-And use templates to generate our desired html file. 
+# Work in Progress
+1. Cookies
+2. Sessions
+3. User Authentication
 
-Step 1: Parse file - this will take our template file, tpl.gothml
-        The extension name ".gohtml" can be anything here.
-        There are a few methods available for us: template.ParseFiles(), ParseGlob
-        Visit the official documentation on how to set up templates.
+Please let me know if you have suggestions on other useful Go snippets for web programming. 
 
-Step 2: Create a file using os.Create() method for our "index.html"
-
-Step 3: Execute the file - this will convert the template into html. 
-
-# 02-Starting a Server
+# Credit: 
+Many examples are taken from Todd McLeod's Go Web App Course. 
+He delivers this course with amazing flow and explores these concepts in detail. 
+These snippets are just succinct examples. 
