@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BAR</title>
+</head>
+<body>
+
+<h1>Welcome to the bar. What can I get you to drink?</h1>
+
+User info from sessionID:
+{{if .First}}
+    Username: {{.UserName}}<br>
+    Firstname: {{.First}}<br>
+    Lastname: {{.Last}}<br>
+{{end}}
+
+</body>
+</html>
