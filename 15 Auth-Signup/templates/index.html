@@ -1,4 +1,4 @@
-!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,17 +6,24 @@
 </head>
 <body>
 
-{{if .First}}
-USER NAME {{.UserName}}<br>
-PASSWORD {{.Password}}<br>
-FIRST {{.First}}<br>
-LAST {{.Last}}<br>
-{{else}}
-<h2><a href="/signup">sign up</a></h2>
-<h2><a href="/login">log in</a></h2>
+    <h2><a href="/signup">sign up</a></h2>
+    <h1>In Memory Database</h1> 
+Here is all the store user information. 
+Try entering 2 of the same passwords, they should not have the same hash value
+<br>
+
+{{range .}}
+Username: {{.UserName}}<br>
+Password hash: 
+{{range .Password}} 
+{{.}}
+{{end}}
+<br>
+Firstname: {{.First}}<br>
+Lastname: {{.Last}}<br>
+<br>
 {{end}}
 
-<br>
-<h2>Go to <a href="/bar">the bar</a></h2>
+
 </body>
 </html>

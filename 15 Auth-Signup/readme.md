@@ -17,12 +17,13 @@ $ go get golang.org/x/crypto/bcrypt
 The 2 functions we will use: 
 ```go
 // To generate hash from password
+// Note: the hashed password is a slice of byte
 func GenerateFromPassword(password []byte, cost int) ([]byte, error)
 
 // To compare user entered password against our hashed password
 func CompareHashAndPassword(hashedPassword, password []byte) error
 ```
-In case we will need to increase hash cost in the future
+In case we will need to increase hash cost in the future.
 ```go
 func Cost(hashedPassword []byte) (int, error)
 ```
