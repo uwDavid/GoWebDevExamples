@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <h2>
+        <a href="/signup">Sign Up</a>
+        <a href="/login">Login</a>
+        <a href="/secret">Secret page</a>
+        <a href="/admin">Admin page</a>
+        <a href="/student">Student page</a>
+    </h2>
+    <h1>In Memory Database</h1> 
+Here is all the store user information. 
+Try entering 2 of the same passwords, they should not have the same hash value
+<br>
+
+{{range .}}
+Username: {{.UserName}}<br>
+Password hash: 
+{{range .Password}} 
+{{.}}
+{{end}}
+<br>
+Firstname: {{.First}}<br>
+Lastname: {{.Last}}<br>
+<br>
+{{end}}
+
+
+</body>
+</html>
