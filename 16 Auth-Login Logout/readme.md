@@ -24,5 +24,8 @@ To log a user out, we need to ensure 2 things:
 
 To handle the situation where the user just walked away without logging out, we need to do a clean up of the session database and set a timer on the cookie.
 
-** Need to fix secret page and permissions page.
+# **KEY LEARNING: return after a redirect for denied permissions.
+This came up when trying to resolve this error:
 superfluous response.WriteHeader call from main.secret (inout.go:61) and line 55... 
+
+This is because the code continues to render. 
