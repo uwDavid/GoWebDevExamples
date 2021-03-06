@@ -10,9 +10,9 @@ import (
 
 func main() {
 	// OR connect using a URL
+	// check sql documentation on this connection string
 	connStr := "postgres://tester:password@localhost/test?sslmode=disable"
 
-	// connStr := "user=postgres dbname=person sslmode=disable"
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal(err)
