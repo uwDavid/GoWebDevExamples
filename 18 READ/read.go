@@ -38,8 +38,8 @@ func main() {
 	}
 
 	// Querying database
-	// READ
-	fmt.Printf("Running Query: SELCT * From person LIMIT 10.\n")
+	// Read - using Query()
+	fmt.Printf("Running Query: SELCT * From person LIMIT 5.\n")
 	rows, err := db.Query("SELECT * FROM person LIMIT 10;")
 	if err != nil {
 		panic(err)
@@ -60,5 +60,21 @@ func main() {
 	for _, person := range people {
 		fmt.Printf("ID: %d, First Name: %s, Last Name: %s \n", person.id, person.first_name, person.last_name)
 	}
-	fmt.Printf("End of SELECT query.\n")
+	fmt.Printf("End of SELECT using Query().\n")
+
+	// Read - using QueryRow()
+	person_id := 43
+	row := db.QueryRow("SELECT * FROM person WHERE id= $1", person_id)
+	onePerson := Person{}
+	err2 := row.Scan(&onePerson.id, &onePerson.first_name, &onePerson.last_name, &onePerson.email,
+		&onePerson.gender, &onePerson.date_of_birth, &onePerson.country_of_birth)
+	if err2 == sql.ErrNoRows {
+		fmt.Printf("Person with id %d does not exist.", person_id)
+		panic(err)
+	}
+	if err2 != nil {
+		panic(err)
+	}
+	fmt.Printf("one Person ID: %d, First Name: %s, Last Name: %s \n", onePerson.id, onePerson.first_name, onePerson.last_name)
+	fmt.Printf("End of SELECT using QueryRow().\n")
 }

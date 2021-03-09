@@ -1,4 +1,4 @@
-# 18 CRUD Operations
+# 18 CRUD Operations - READ
 Now that we have our drivers and can connect to the database, let's see how we can made updates to the database. 
 
 CRUD stands for: 
@@ -26,7 +26,7 @@ Try running this code with email being just a String, and you can see the pointe
 Step 2: connect to database with sql.Open()
 Step 3: db.Ping() to check if connection is live
 
-# READ using SELECT
+# Read using Query()
 To read from the database we will use the Query() method in the "database/sql" package. 
 
 Step 1: Query() will return a pointer to a type Rows (plural)
@@ -36,4 +36,11 @@ Step 2: Use Scan() on the Rows pointer to get 1 row of data
 This for Rows.Next() pattern is very well documented here:
 https://pkg.go.dev/database/sql#example-DB.Query-MultipleResultSets
 
+# Read using QueryRow()
+Similar to Query, but this will only return 1 row of data. 
+
+Step 1: QueryRow() will return a poitner to a Row type (singular)
+Step 2: row.Scan() on the row pointer to get our data
+
+Note: we pass in the id parameter to postgres query by using $1. 
 
