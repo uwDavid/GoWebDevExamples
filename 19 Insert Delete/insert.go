@@ -38,27 +38,45 @@ func main() {
 		fmt.Println("Connected to db.")
 	}
 
-	// Insert - using Exec()
+	// INSERT - using Exec()
+	fmt.Println("INSERT into table...")
 	_, err2 := db.Exec("INSERT INTO person (first_name, last_name, email, gender, date_of_birth, country_of_brith) values($1, $2, $3, $4, $5, $6)", "Insert", "Example", "inserted@example.com", "Male", "1963/07/13", "Unicorn Land")
 	if err2 != nil {
-		panic(err)
+		panic(err2)
 	}
 
 	// To ensure we added this new person
-	// Read - using QueryRow()
+	// READ - using QueryRow()
+	fmt.Println("READ from table to find inserted person...")
 	country := "Unicorn Land"
-	row := db.QueryRow("SELECT * FROM person WHERE country_of_birth= $1", country)
+	row := db.QueryRow("SELECT * FROM person WHERE country_of_brith= $1", country)
 	onePerson := Person{}
 	err3 := row.Scan(&onePerson.id, &onePerson.first_name, &onePerson.last_name, &onePerson.email,
 		&onePerson.gender, &onePerson.date_of_birth, &onePerson.country_of_birth)
 	if err3 == sql.ErrNoRows {
 		fmt.Printf("Person from country %s does not exist.", country)
-		panic(err)
+		panic(err3)
 	}
 	if err3 != nil {
-		panic(err)
+		panic(err3)
 	}
 	fmt.Printf("Insert Example ID: %d, First Name: %s, Last Name: %s, Country of Birth: %s\n", onePerson.id, onePerson.first_name, onePerson.last_name, onePerson.country_of_birth)
 
-	//
+	// DELETE - using 
+	fmt.Printf("Deleting person from table:\n")
+	_, err4 := db.Exec("DELETE FROM person WHERE country_of_brith=$1", country)
+	if err4 != nil {
+		panic(err4)
+	}
+
+	// READ again to see if person was deleted
+	fmt.Printf("Reading on person again...\n")
+	row2 := db.QueryRow("SELECT * FROM person WHERE country_of_brith= $1", country)
+	deletedPerson := Person{}
+	err5 := row2.Scan(&deletedPerson.id, &deletedPerson.first_name, &deletedPerson.last_name, &deletedPerson.email,
+		&deletedPerson.gender, &deletedPerson.date_of_birth, &deletedPerson.country_of_birth)
+	if err5 == sql.ErrNoRows {
+		fmt.Printf("Person from country %s does not exist.\n", country)
+	}
+	fmt.Printf("End of program.\n")
 }
